@@ -30,6 +30,7 @@ jobs:
 
       - name: Scan Image
         run: |
+          printf ".\ntrue\nfalse\nfalse" | ./lw-scanner config data
           ./lw-scanner image evaluate alannix/distroless-python latest --build-id ${{ github.run_id }} -f
 
       - name: Check for Vulnerabilities

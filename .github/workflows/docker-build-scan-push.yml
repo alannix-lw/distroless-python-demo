@@ -14,6 +14,7 @@ jobs:
     env:
       LW_ACCESS_TOKEN: ${{ secrets.LW_ACCESS_TOKEN }}
       LW_ACCOUNT_NAME: ${{ secrets.LW_ACCOUNT_NAME }}
+      LW_SCANNER_SAVE_RESULTS: true
       LW_SCANNER_SCAN_LIBRARY_PACKAGES: true
     steps:
 
@@ -32,7 +33,8 @@ jobs:
 
       - name: Scan Image
         run: |
-          ./lw-scanner image evaluate alannix/distroless-python latest --build-id ${{ github.run_id }} -f
+          printf ".\ntrue\nfalse\nfalse" | ./lw-scanner config data
+          ./lw-scanner image evaluate alannix/distroless-python latest --build-id ${{ github.run_id }}
 
       - name: Check for Vulnerabilities
         id: vuln-check
