@@ -1,11 +1,9 @@
-name: Docker Build/Scan/Push
+name: Docker Build/Scan
 
 on:
-  push:
+  pull_request:
     branches:
       - main
-  schedule:
-    - cron: "0 7 * * 4"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -54,12 +52,3 @@ jobs:
         with:
           script: |
             core.setFailed("Fixable vulnerabilities found!")
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
-
-      - name: Push the latest Docker image
-        run: docker push alannix/distroless-python
