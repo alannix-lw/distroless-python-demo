@@ -3,7 +3,7 @@ name: Docker Build/Scan/Push
 on:
   push:
     branches:
-      - main
+      - github-actions
   schedule:
     - cron: "0 7 * * 4"
 
